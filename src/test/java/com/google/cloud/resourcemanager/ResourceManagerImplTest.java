@@ -550,10 +550,10 @@ public class ResourceManagerImplTest {
         ImmutableList.of(new Lien(resourceManagerMock, new LienInfo.BuilderImpl(LIEN_PARENT)));
     Tuple<String, Iterable<com.google.api.services.cloudresourcemanager.model.Lien>> result =
         Tuple.of(CURSOR, Iterables.transform(lienList, LienInfo.TO_PB_FUNCTION));
-    EasyMock.expect(resourceManagerRpcMock.listLien(LIEN_PARENT, EMPTY_RPC_OPTIONS))
+    EasyMock.expect(resourceManagerRpcMock.listLiens(LIEN_PARENT, EMPTY_RPC_OPTIONS))
         .andReturn(result);
     EasyMock.replay(resourceManagerRpcMock);
-    Page<Lien> page = resourceManagerMock.listLien(LIEN_PARENT);
+    Page<Lien> page = resourceManagerMock.listLiens(LIEN_PARENT);
     assertEquals(CURSOR, page.getNextPageToken());
     assertArrayEquals(lienList.toArray(), Iterables.toArray(page.getValues(), Lien.class));
   }
@@ -576,10 +576,10 @@ public class ResourceManagerImplTest {
         Tuple.of(CURSOR, Iterables.transform(lienList, LienInfo.TO_PB_FUNCTION));
     Map<ResourceManagerRpc.Option, ?> RPC_OPTIONS =
         ImmutableMap.of(ResourceManagerRpc.Option.PAGE_SIZE, 1);
-    EasyMock.expect(resourceManagerRpcMock.listLien(LIEN_PARENT, RPC_OPTIONS)).andReturn(result);
+    EasyMock.expect(resourceManagerRpcMock.listLiens(LIEN_PARENT, RPC_OPTIONS)).andReturn(result);
     EasyMock.replay(resourceManagerRpcMock);
     Page<Lien> page =
-        resourceManagerMock.listLien(LIEN_PARENT, ResourceManager.LienListOption.pageSize(1));
+        resourceManagerMock.listLiens(LIEN_PARENT, ResourceManager.LienListOption.pageSize(1));
     assertEquals(CURSOR, page.getNextPageToken());
     assertArrayEquals(lienList.toArray(), Iterables.toArray(page.getValues(), Lien.class));
   }
