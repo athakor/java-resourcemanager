@@ -301,4 +301,19 @@ public class HttpResourceManagerRpc implements ResourceManagerRpc {
       throw translate(ex);
     }
   }
+
+  @Override
+  public Operation getOperations(String name) {
+    try {
+      return resourceManager.operations().get(name).execute();
+    } catch (IOException ex) {
+      ResourceManagerException translated = translate(ex);
+      if (translated.getCode() == HTTP_FORBIDDEN || translated.getCode() == HTTP_NOT_FOUND) {
+        // Service can return either 403 or 404 to signify that the operation doesn't exist.
+        return null;
+      } else {
+        throw translated;
+      }
+    }
+  }
 }

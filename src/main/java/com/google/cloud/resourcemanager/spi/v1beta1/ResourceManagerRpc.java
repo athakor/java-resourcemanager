@@ -16,6 +16,7 @@
 
 package com.google.cloud.resourcemanager.spi.v1beta1;
 
+import com.google.api.services.cloudresourcemanager.model.Operation;
 import com.google.api.services.cloudresourcemanager.model.Policy;
 import com.google.api.services.cloudresourcemanager.model.Project;
 import com.google.cloud.ServiceRpc;
@@ -124,5 +125,15 @@ public interface ResourceManagerRpc extends ServiceRpc {
    */
   List<Boolean> testPermissions(String projectId, List<String> permissions);
 
+  /**
+   * Gets the latest state of a long-running operation.
+   *
+   * <p>Clients can use this method to poll the operation result at intervals as recommended by the
+   * API service.
+   *
+   * @param name The name of the operation resource.
+   * @return
+   */
+  Operation getOperations(String name);
   // TODO(ajaykannan): implement "Organization" functionality when available (issue #319)
 }
