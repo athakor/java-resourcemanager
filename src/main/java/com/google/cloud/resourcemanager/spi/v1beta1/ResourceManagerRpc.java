@@ -132,8 +132,9 @@ public interface ResourceManagerRpc extends ServiceRpc {
    * API service.
    *
    * @param name The name of the operation resource.
-   * @return
+   * @return The result of a long-running operation.
    */
   Operation getOperations(String name);
+
   // TODO(ajaykannan): implement "Organization" functionality when available (issue #319)
 }
