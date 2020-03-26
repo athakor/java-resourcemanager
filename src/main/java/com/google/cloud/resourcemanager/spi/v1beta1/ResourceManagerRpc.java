@@ -16,6 +16,7 @@
 
 package com.google.cloud.resourcemanager.spi.v1beta1;
 
+import com.google.api.services.cloudresourcemanager.model.Organization;
 import com.google.api.services.cloudresourcemanager.model.Policy;
 import com.google.api.services.cloudresourcemanager.model.Project;
 import com.google.cloud.ServiceRpc;
@@ -124,5 +125,10 @@ public interface ResourceManagerRpc extends ServiceRpc {
    */
   List<Boolean> testPermissions(String projectId, List<String> permissions);
 
-  // TODO(ajaykannan): implement "Organization" functionality when available (issue #319)
+  /**
+   * Fetches an Organization by the specified resource name.
+   *
+   * @throws ResourceManagerException upon failure
+   */
+  Organization getOrganization(String name);
 }

@@ -20,6 +20,7 @@ import static com.google.cloud.RetryHelper.runWithRetries;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.api.gax.paging.Page;
+import com.google.api.services.cloudresourcemanager.model.Organization;
 import com.google.cloud.BaseService;
 import com.google.cloud.PageImpl;
 import com.google.cloud.PageImpl.NextPageFetcher;
@@ -263,6 +264,24 @@ final class ResourceManagerImpl extends BaseService<ResourceManagerOptions>
             @Override
             public List<Boolean> call() {
               return resourceManagerRpc.testPermissions(projectId, permissions);
+            }
+          },
+          getOptions().getRetrySettings(),
+          EXCEPTION_HANDLER,
+          getOptions().getClock());
+    } catch (RetryHelperException ex) {
+      throw ResourceManagerException.translateAndThrow(ex);
+    }
+  }
+
+  @Override
+  public Organization getOrganization(final String name) {
+    try {
+      return runWithRetries(
+          new Callable<Organization>() {
+            @Override
+            public Organization call() {
+              return resourceManagerRpc.getOrganization(name);
             }
           },
           getOptions().getRetrySettings(),

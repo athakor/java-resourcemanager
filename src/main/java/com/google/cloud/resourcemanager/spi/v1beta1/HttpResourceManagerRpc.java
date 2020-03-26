@@ -30,16 +30,7 @@ import com.google.api.gax.retrying.ResultRetryAlgorithm;
 import com.google.api.gax.retrying.RetrySettings;
 import com.google.api.gax.retrying.TimedAttemptSettings;
 import com.google.api.services.cloudresourcemanager.CloudResourceManager;
-import com.google.api.services.cloudresourcemanager.model.GetIamPolicyRequest;
-import com.google.api.services.cloudresourcemanager.model.ListProjectsResponse;
-import com.google.api.services.cloudresourcemanager.model.Operation;
-import com.google.api.services.cloudresourcemanager.model.Policy;
-import com.google.api.services.cloudresourcemanager.model.Project;
-import com.google.api.services.cloudresourcemanager.model.SetIamPolicyRequest;
-import com.google.api.services.cloudresourcemanager.model.Status;
-import com.google.api.services.cloudresourcemanager.model.TestIamPermissionsRequest;
-import com.google.api.services.cloudresourcemanager.model.TestIamPermissionsResponse;
-import com.google.api.services.cloudresourcemanager.model.UndeleteProjectRequest;
+import com.google.api.services.cloudresourcemanager.model.*;
 import com.google.cloud.Tuple;
 import com.google.cloud.http.BaseHttpServiceException;
 import com.google.cloud.http.HttpTransportOptions;
@@ -297,6 +288,15 @@ public class HttpResourceManagerRpc implements ResourceManagerRpc {
         answer.add(permissionsOwned.contains(p));
       }
       return answer.build();
+    } catch (IOException ex) {
+      throw translate(ex);
+    }
+  }
+
+  @Override
+  public Organization getOrganization(String name) {
+    try {
+      return resourceManager.organizations().get(name).execute();
     } catch (IOException ex) {
       throw translate(ex);
     }
