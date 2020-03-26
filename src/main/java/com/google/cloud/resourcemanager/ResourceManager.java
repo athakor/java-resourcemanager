@@ -337,4 +337,15 @@ public interface ResourceManager extends Service<ResourceManagerOptions> {
    *     Platform Services</a>
    */
   List<Boolean> testPermissions(String projectId, List<String> permissions);
+
+  /**
+   * Returns the IAM access control policy for an organization. Returns {@code null} if the resource
+   * does not exist or if you do not have adequate permission to get the policy.
+   *
+   * @throws ResourceManagerException upon failure
+   * @see <a href=
+   *     "https://cloud.google.com/resource-manager/reference/rest/v1/organizations/getIamPolicy">
+   *     Resource Manager getIamPolicy</a>
+   */
+  Policy getOrgPolicy(String name);
 }
