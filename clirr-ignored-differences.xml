@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- see http://mojo.codehaus.org/clirr-maven-plugin/examples/ignored-differences.html -->
+<differences>
+    <difference>
+        <className>com/google/cloud/resourcemanager/ResourceManager</className>
+        <method>com.google.api.services.cloudresourcemanager.model.Organization getOrganization(java.lang.String)</method>
+        <differenceType>7012</differenceType>
+    </difference>
+    <difference>
+        <className>com/google/cloud/resourcemanager/spi/v1beta1/ResourceManagerRpc</className>
+        <method>com.google.api.services.cloudresourcemanager.model.Organization getOrganization(java.lang.String)</method>
+        <differenceType>7012</differenceType>
+    </difference>
+</differences>
