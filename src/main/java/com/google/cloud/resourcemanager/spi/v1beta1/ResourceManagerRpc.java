@@ -126,7 +126,7 @@ public interface ResourceManagerRpc extends ServiceRpc {
   List<Boolean> testPermissions(String projectId, List<String> permissions);
 
   /**
-   * Fetches an Organization by the specified resource name.
+   * Fetches an Organization for the specified resource name.
    *
    * @throws ResourceManagerException upon failure
    */
