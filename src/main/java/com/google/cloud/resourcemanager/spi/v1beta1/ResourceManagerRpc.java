@@ -124,5 +124,10 @@ public interface ResourceManagerRpc extends ServiceRpc {
    */
   List<Boolean> testPermissions(String projectId, List<String> permissions);
 
-  // TODO(ajaykannan): implement "Organization" functionality when available (issue #319)
+  /**
+   * Replaces the IAM policy associated with an organization.
+   *
+   * @throws ResourceManagerException upon failure
+   */
+  Policy replaceOrgPolicy(String resource, Policy newPolicy);
 }
