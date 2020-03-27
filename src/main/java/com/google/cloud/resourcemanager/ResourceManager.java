@@ -339,9 +339,11 @@ public interface ResourceManager extends Service<ResourceManagerOptions> {
   List<Boolean> testPermissions(String projectId, List<String> permissions);
 
   /**
-   * Sets the access control policy on an Organization resource. Replaces any existing policy. The
-   * resource field should be the organization's resource name, e.g. "organizations/123".
+   * Sets the access control policy on an Organization resource. Replaces any existing policy.
    *
+   * @param resource the organization's resource name, e.g. "organizations/123"
+   * @param newPolicy the new IAM policy for resource
+   * @return the updated IAM policy for resource.
    * @throws ResourceManagerException upon failure
    * @see <a href=
    *     "https://cloud.google.com/resource-manager/reference/rest/v1/organizations/setIamPolicy">
